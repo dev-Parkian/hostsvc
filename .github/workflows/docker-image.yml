@@ -22,5 +22,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true #이미지 레지스트리에 자동으로 푸쉬
-        tags: dev-Parkian/hostservice:${{ github.sha }}
+        tags: parkian/hostsvc:${{ github.sha }}
 
