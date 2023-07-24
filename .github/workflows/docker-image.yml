@@ -23,4 +23,20 @@ jobs:
       with:
         push: true #이미지 레지스트리에 자동으로 푸쉬
         tags: parkian/hostsvc:${{ github.sha }}
+  updateYaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1.Checkout
+        uses: actions/checkout@v3
+        with: #추가정보
+          repository: 'dev-Parkian/hostsvc-cd'
+          token: ${{ secrets.GITHAB_TOKEN }}
+      - name: 2. Change Docker tags
+        # | == 지금 문장은 하나의 텍스트 파일로 씀 
+        run: |
+          cat test.yaml | sed "s/image: dangtong\/node-app:.*/images: dangtong\/node-app:${{ github.sha }}/g"
+          git config --global user.email "dev.parkian@gmail.com"
+          git config --global user.name "dev_Parkian"
+          git commit -am "triggered by github action"
+          git push origin main
 
