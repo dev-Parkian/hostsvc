@@ -25,6 +25,7 @@ jobs:
         tags: parkian/hostsvc:${{ github.sha }}
   updateYaml:
     runs-on: ubuntu-latest
+    needs: buildImage #updateYaml은 buildImage가 끝나야 실행됨
     steps:
       - name: 1.Checkout
         uses: actions/checkout@v3
