@@ -35,7 +35,7 @@ jobs:
       - name: 2. Change Docker tags
         # | == 지금 문장은 하나의 텍스트 파일로 씀 
         run: |
-          cat test.yaml | sed "s/image: dangtong\/node-app:.*/images: dangtong\/node-app:${{ github.sha }}/g"
+          sed -i "s/image: dangtong\/node-app:.*/images: dangtong\/node-app:${{ github.sha }}/g" hostservice-deploy.yaml
           git config --global user.email "dev.parkian@gmail.com"
           git config --global user.name "dev_Parkian"
           git commit -am "triggered by github action"
