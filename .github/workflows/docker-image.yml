@@ -22,7 +22,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true #이미지 레지스트리에 자동으로 푸쉬
-        tags: parkian/hostsvc:${{ github.sha }}
+        tags: parkian/hostsvc:${{ github0.sha }}
   updateYaml:
     runs-on: ubuntu-latest
     needs: buildImage #updateYaml은 buildImage가 끝나야 실행됨
@@ -34,8 +34,9 @@ jobs:
           token: ${{ secrets.GITHAB_TOKEN }}
       - name: 2. Change Docker tags
         # | == 지금 문장은 하나의 텍스트 파일로 씀 
+        # -i랑 파일에 저장할 거
         run: |
-          sed -i "s/image: dangtong\/node-app:.*/images: dangtong\/node-app:${{ github.sha }}/g" hostservice-deploy.yaml
+          sed -i "s/image: dangtong\/hostservice:.*/images: dangtong\/hostservice:${{ github.sha }}/g" hostservice-deploy.yaml
           git config --global user.email "dev.parkian@gmail.com"
           git config --global user.name "dev_Parkian"
           git commit -am "triggered by github action"
