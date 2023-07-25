@@ -1,47 +1,3 @@
-# name: Host Service CI
-# #이벤트
-# on:
-#   push:
-#     branches: [ "main" ]
-#     paths: ["*.js"]
-
-# jobs:
-#   buildImage:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: 1. Checkout
-#       uses: actions/checkout@v3 #source를 가져오는 것을 checkout
-
-#     - name: 2. Login to DockerHub
-#       uses: docker/login-action@v2 #login할 때 정보 가지고 옴
-#       with:
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
-#     - name: 3. Build and push
-#       id: docker_build
-#       uses: docker/build-push-action@v2
-#       with:
-#         push: true #이미지 레지스트리에 자동으로 푸쉬
-#         tags: parkian/hostsvc:${{ github0.sha }}
-#   updateYaml:
-#     runs-on: ubuntu-latest
-#     needs: buildImage #updateYaml은 buildImage가 끝나야 실행됨
-#     steps:
-#       - name: 1.Checkout
-#         uses: actions/checkout@v3
-#         with: #추가정보
-#           repository: 'dev-Parkian/hostsvc-cd'
-#           token: ${{ secrets.GITHAB_TOKEN }}
-#       - name: 2. Change Docker tags
-#         # | == 지금 문장은 하나의 텍스트 파일로 씀 
-#         # -i랑 파일에 저장할 거
-#         run: |
-#           sed -i "s/image: dangtong\/hostservice:.*/image: dangtong\/hostservice:${{ github.sha }}/g" hostservice-deploy.yaml
-#           git config --global user.email "dev.parkian@gmail.com"
-#           git config --global user.name "dev_Parkian"
-#           git commit -am "triggered by github action"
-#           git push origin main
----
 name: Host Service CI
 
 on:
@@ -67,7 +23,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: parkian/hostservice:${{ github.sha }}
+        tags: dangtong/hostservice:${{ github.sha }}
   updateYaml:
     runs-on: ubuntu-latest
     needs: buildImage
