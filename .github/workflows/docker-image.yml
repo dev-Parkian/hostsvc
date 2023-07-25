@@ -36,7 +36,7 @@
 #         # | == 지금 문장은 하나의 텍스트 파일로 씀 
 #         # -i랑 파일에 저장할 거
 #         run: |
-#           sed -i "s/image: dangtong\/hostservice:.*/images: dangtong\/hostservice:${{ github.sha }}/g" hostservice-deploy.yaml
+#           sed -i "s/image: dangtong\/hostservice:.*/image: dangtong\/hostservice:${{ github.sha }}/g" hostservice-deploy.yaml
 #           git config --global user.email "dev.parkian@gmail.com"
 #           git config --global user.name "dev_Parkian"
 #           git commit -am "triggered by github action"
